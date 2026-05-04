@@ -121,7 +121,7 @@ split gives a start with a day (`D20`) and an end with just a time (`20:00`).
 That's clearly a same-day closure. So after pairing, if exactly one side is
 missing a day and both times are present, the known day gets copied across.
 
-But naïve propagation breaks on multi-day ranges. Two guards:
+But naive propagation breaks on multi-day ranges. Two guards:
 
 - Don't propagate if the populated side has more than one day token (it's a
   date range, not a same-day closure).
