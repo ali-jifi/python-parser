@@ -186,9 +186,9 @@ pip install pandas
 python parse.py
 ```
 
-Reads `dock closure history (vessel close).csv` from the current directory,
-writes `docks_parsed.csv` next to it. Prints the confidence histogram and
-average score at the end.
+Reads `input.csv` from the current directory,
+writes `output.csv` next to it. Prints the confidence histogram and
+average score at the end in the CLI.
 
 ## Files
 
