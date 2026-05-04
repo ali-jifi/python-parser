@@ -42,12 +42,12 @@ Average confidence: **0.862**.
 
 That's after iterating from a much rougher first cut: the original parser
 landed **71.1%** at 0.95 with **9.0%** completely unparsed (0.0). The current
-version is at 82.9% / 6.6% — a **+11.8 percentage-point gain** in fully-parsed
+version is at 82.9% / 6.6%, a **+11.8 percentage-point gain** in fully-parsed
 rows (+98 rows promoted), and a **−2.4 pp drop** in completely-unparsed rows
 (−20 rows recovered). The remaining ~17% breaks down as roughly:
 
 - ~7% genuinely incomplete remarks (`till further notice`, `Maintenance fender
-  chains POC ...`, single-time observations) — no parse fix can help these
+  chains POC ...`, single-time observations), no parse fix can help these
 - ~10% structural edge cases (dates with internal whitespace like `2/ 9`,
   multi-day ranges without a connector word, malformed phone-number-adjacent
   digit runs)
@@ -111,7 +111,7 @@ There's also a special case for `0700-1700 daylight hours 05-22 thru 05-24`
 where the time range is fully on the left of the connector, both times get
 spread across the two days instead of pairing the second time with the
 second day. The symmetric case (`0700 to 1700 daily 5/12 thru 5/16`) is
-handled too — when left has a time range and right has a day range, the
+handled too, when left has a time range and right has a day range, the
 times bracket the day range.
 
 ### 4. Same-day propagation (and why it has guards)
@@ -126,7 +126,7 @@ But naive propagation breaks on multi-day ranges. Two guards:
 - Don't propagate if the populated side has more than one day token (it's a
   date range, not a same-day closure).
 - Don't propagate if the empty side contains a date-like pattern that just
-  failed to parse (e.g. `2/ 9` with whitespace inside — a real date, just
+  failed to parse (e.g. `2/ 9` with whitespace inside, a real date, just
   not in our regex).
 
 This pair of guards moved 60+ rows from 0.85 to 0.95 without introducing
@@ -134,7 +134,7 @@ single-day collapses on real ranges.
 
 ### 5. Score it
 
-Confidence is just "how many of the four fields did we get?" — start day,
+Confidence is just "how many of the four fields did we get?", start day,
 start time, end day, end time. Starts at 0.4, each filled field adds a bit:
 
 - **0.95** - all four fields filled. Almost always right.
@@ -142,7 +142,7 @@ start time, end day, end time. Starts at 0.4, each filled field adds a bit:
 - **0.7**  - two of four. Day-only, time-only, or partial entries; worth a
   human eyeball.
 
-This isn't a probabilistic model — just a "more info = more trust"
+This isn't a probabilistic model, just a "more info = more trust"
 heuristic. Good enough to sort the output by and triage from.
 
 ### 6. Write the result
