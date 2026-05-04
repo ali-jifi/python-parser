@@ -201,4 +201,4 @@ average score at the end.
 I know this is a simple project and not really worth making open source or
 public but hopefully someone finds this useful!
 
-> Note: Developed and documented by humans with the aid of AI-assisted systems; all code reviewed and tested by the author (a human).
+> Note: Developed and documented by humans with the aid of AI-powered systems; all code reviewed and tested by the author (a human).
