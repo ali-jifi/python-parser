@@ -1,8 +1,6 @@
 # Dock Closure Remark Parser
 
-Pulls start/end times and dates out of the messy `remarks` column in our dock
-closure CSV so we have something usable for downstream analysis instead of a
-bunch of free-text notes.
+Cleans noise out of free-text notes/remarks, regexes out every day and time, pairs them into start/end windows using connector words like "thru" (or by count when there isn't one), and scores each row by how many fields got filled.
 
 ## Why this exists
 
